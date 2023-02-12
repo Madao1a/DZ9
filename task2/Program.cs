@@ -26,14 +26,30 @@ void PrintMatrix(int [,] matrix)
     }
 }
 
+
+int[,] MatrixMulti(int[,] matrix, int[,] matrix1, int length)
+{
+int[,] matrix3 = new int[length, length];
+for (int i = 0; i < matrix.GetLength(0); i++)
+{
+    for (int j = 0; j < matrix.GetLength(0); j++)
+    {
+       int sum =0;
+       for (int z = 0; z < matrix.GetLength(1); z++)
+       {
+        sum+= matrix[j,z] * matrix1[z,j];
+       }
+       matrix3[i,j]=sum;
+    }
+}
+return matrix3;
+}
+
 int ReadInt(string massage)
 {
     Console.WriteLine(massage);
     return int.Parse (Console.ReadLine());
 }
-
-//int MatrixMulti(int[,] matrix, int[,] matrix1, int matrix2)
-
 
 int length = ReadInt("Строки ");
 int wigth = ReadInt("Столбцы ");
@@ -49,7 +65,7 @@ Console.WriteLine();
 int[,] matrix1 = CreateMatrix(length1,wigth1);
 PrintMatrix(matrix1);
 
-int[,] matrix2 = new int[length, length];
+
  
 if (matrix.GetLength(1)!=matrix1.GetLength(0))
 {
@@ -57,20 +73,9 @@ if (matrix.GetLength(1)!=matrix1.GetLength(0))
 }
 else
 {
-for (int i = 0; i < matrix2.GetLength(0); i++)
-{
-    for (int j = 0; j < matrix2.GetLength(1); j++)
-    {
-       int sum =0;
-       for (int z = 0; z < matrix.GetLength(1); z++)
-       {
-        sum+= matrix[j,z] * matrix1[z,j];
-       }
-       matrix2[i,j]=sum;
-    }
-}
+int[,] matrix4= MatrixMulti(matrix,matrix,length);
 Console.WriteLine();
-PrintMatrix(matrix2);
+PrintMatrix(matrix4);
 }
 
 
